@@ -11,43 +11,52 @@ import rickyxe.demo.bgwork.BackgroundWorkActivity;
 import rickyxe.demo.bgwork2.BackgroundWorkActivity2;
 import rickyxe.demo.contactpick.ContactPickActivity;
 import rickyxe.demo.dialogexample.DialogTestActivity;
+import rickyxe.demo.lifecycledemo.LifecycleDemoActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    Button serviceTestBtn;
-    Button serviceTest2Btn;
-    Button dialogTestBtn;
-    Button contactPickBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        serviceTestBtn = findViewById(R.id.btn_service_test);
+        Button serviceTestBtn = findViewById(R.id.btn_service_test);
         serviceTestBtn.setOnClickListener(this);
 
-        serviceTest2Btn = findViewById(R.id.btn_service_test_2);
+        Button serviceTest2Btn = findViewById(R.id.btn_service_test_2);
         serviceTest2Btn.setOnClickListener(this);
 
-        dialogTestBtn = findViewById(R.id.btn_dialog_test_1);
+        Button dialogTestBtn = findViewById(R.id.btn_dialog_test_1);
         dialogTestBtn.setOnClickListener(this);
 
-        contactPickBtn = findViewById(R.id.btn_contact_pick);
+        Button contactPickBtn = findViewById(R.id.btn_contact_pick);
         contactPickBtn.setOnClickListener(this);
+
+        Button lifecycleTest1Btn = findViewById(R.id.btn_lifecycle_test_1);
+        lifecycleTest1Btn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_service_test) {
-            jumpToActivity(BackgroundWorkActivity.class);
-        } else if (id == R.id.btn_service_test_2) {
-            jumpToActivity(BackgroundWorkActivity2.class);
-        } else if (id == R.id.btn_dialog_test_1) {
-            jumpToActivity(DialogTestActivity.class);
-        } else if (id == R.id.btn_contact_pick) {
-            jumpToActivity(ContactPickActivity.class);
+        switch (id) {
+            case R.id.btn_service_test:
+                jumpToActivity(BackgroundWorkActivity.class);
+                break;
+            case R.id.btn_service_test_2:
+                jumpToActivity(BackgroundWorkActivity2.class);
+                break;
+            case R.id.btn_dialog_test_1:
+                jumpToActivity(DialogTestActivity.class);
+                break;
+            case R.id.btn_contact_pick:
+                jumpToActivity(ContactPickActivity.class);
+                break;
+            case R.id.btn_lifecycle_test_1:
+                jumpToActivity(LifecycleDemoActivity.class);
+                break;
+            default:
+                break;
         }
     }
 

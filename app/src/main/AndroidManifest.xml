@@ -11,21 +11,20 @@
         android:theme="@style/AppTheme">
         <activity android:name="rickyxe.demo.MainActivity">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="rickyxe.demo.bgwork.BackgroundWorkActivity" />
+        <activity android:name="rickyxe.demo.bgwork2.BackgroundWorkActivity2" />
+        <activity android:name="rickyxe.demo.dialogexample.DialogTestActivity" />
+        <activity android:name="rickyxe.demo.contactpick.ContactPickActivity" />
+        <activity android:name=".lifecycledemo.LifecycleDemoActivity" />
 
         <service android:name="rickyxe.demo.bgwork.BackgroundService" />
-
-        <activity android:name="rickyxe.demo.bgwork2.BackgroundWorkActivity2" />
         <service android:name="rickyxe.demo.bgwork2.BackgroundService2" />
 
-        <activity android:name="rickyxe.demo.dialogexample.DialogTestActivity" />
-
-        <activity android:name="rickyxe.demo.contactpick.ContactPickActivity" />
 
     </application>
 
