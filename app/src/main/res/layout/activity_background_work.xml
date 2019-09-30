@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".bgwork.BackgroundWorkActivity">
+
+    <TextView
+        android:id="@+id/text_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="hello world"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_bind_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bind service"/>
+
+        <Button
+            android:id="@+id/btn_unbind_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="unbind service"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_send_msg_to_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send msg to service"/>
+
+</LinearLayout>

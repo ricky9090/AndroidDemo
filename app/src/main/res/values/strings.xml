@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AndroidDemo</string>
+
+    <string name="service_practice_instruction_1">Activity通过Binder获得Service的引用，
+        \n并调用Service的public方法。
+        \nService通过Messenger向Activity发送消息。</string>
+
+    <string name="service_practice_instruction_2">Activity通过Binder获得Service的Messenger，
+        \n并使用send发送消息。
+        \nService同样通过Messenger向Activity发送消息。</string>
+</resources>
