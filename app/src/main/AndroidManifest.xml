@@ -21,6 +21,7 @@
         <activity android:name="rickyxe.demo.dialogexample.DialogTestActivity" />
         <activity android:name="rickyxe.demo.contactpick.ContactPickActivity" />
         <activity android:name=".lifecycledemo.LifecycleDemoActivity" />
+        <activity android:name=".constraintdemo.ConstraintDemoActivity"/>
 
         <service android:name="rickyxe.demo.bgwork.BackgroundService" />
         <service android:name="rickyxe.demo.bgwork2.BackgroundService2" />

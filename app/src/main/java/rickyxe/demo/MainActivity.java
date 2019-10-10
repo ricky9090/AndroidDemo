@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import rickyxe.demo.bgwork.BackgroundWorkActivity;
 import rickyxe.demo.bgwork2.BackgroundWorkActivity2;
+import rickyxe.demo.constraintdemo.ConstraintDemoActivity;
 import rickyxe.demo.contactpick.ContactPickActivity;
 import rickyxe.demo.dialogexample.DialogTestActivity;
 import rickyxe.demo.lifecycledemo.LifecycleDemoActivity;
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button lifecycleTest1Btn = findViewById(R.id.btn_lifecycle_test_1);
         lifecycleTest1Btn.setOnClickListener(this);
+
+        Button constraintTestBtn = findViewById(R.id.btn_constraint_test_1);
+        constraintTestBtn.setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_lifecycle_test_1:
                 jumpToActivity(LifecycleDemoActivity.class);
+                break;
+            case R.id.btn_constraint_test_1:
+                jumpToActivity(ConstraintDemoActivity.class);
                 break;
             default:
                 break;
