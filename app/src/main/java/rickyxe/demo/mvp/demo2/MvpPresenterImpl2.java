@@ -24,7 +24,13 @@ public class MvpPresenterImpl2 extends MvpContract2.Presenter {
     }
 
     @Override
+    public void onCreate() {
+        Log.d("MVP-Test", "presenter onCreate");
+    }
+
+    @Override
     public void onDestroy() {
+        Log.d("MVP-Test", "presenter onDestroy");
         mContext = null;
         mView = null;
         mHandler.removeCallbacksAndMessages(null);
@@ -54,7 +60,7 @@ public class MvpPresenterImpl2 extends MvpContract2.Presenter {
                                     Log.d("MVP-Test","view or result is null, cancel print result");
                                 }
                             }
-                        }, 5000);
+                        }, 3000);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -46,6 +46,7 @@ public class MvpDemoActivity2 extends AppCompatActivity implements MvpContract2.
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        getLifecycle().removeObserver(presenter);
         presenter = null;
         Log.d("MVP-Test","activity destroy");
     }

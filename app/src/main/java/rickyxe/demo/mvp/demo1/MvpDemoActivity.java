@@ -42,6 +42,7 @@ public class MvpDemoActivity extends AppCompatActivity implements MvpContract.Vi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        getLifecycle().removeObserver(presenter);
         presenter = null;
     }
 }

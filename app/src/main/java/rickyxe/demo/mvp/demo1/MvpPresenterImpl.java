@@ -26,11 +26,9 @@ public class MvpPresenterImpl extends MvpContract.Presenter {
 
     @Override
     public void onDestroy() {
-        if (mView != null) {
-            mView.showData("presenter onDestroy");
-        }
         mView = null;
         mContext = null;
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     @Override
@@ -50,6 +48,7 @@ public class MvpPresenterImpl extends MvpContract.Presenter {
                     public void run() {
                         Log.d("MVP-Test", "after current Thread " + Thread.currentThread().getName());
                         if (mView != null) {
+                            Log.d("MVP-Test","showData");
                             mView.showData(result);
                         }
                     }
