@@ -7,7 +7,8 @@
 
     <string name="service_practice_instruction_2">Activity通过Binder获得Service的Messenger，
         \n并使用send发送消息。
-        \nService同样通过Messenger向Activity发送消息。</string>
+        \nService同样通过Messenger与Activity通讯。
+        \n开始通讯后，每3秒发送一条消息，并在界面上打印时间戳。</string>
 
     <string name="mock_content" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

@@ -4,53 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <Button
-        android:id="@+id/btn_service_test"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="service test 1"/>
-
-    <Button
-        android:id="@+id/btn_service_test_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="service test 2"/>
-
-    <Button
-        android:id="@+id/btn_dialog_test_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="dialog test 1"/>
-
-    <Button
-        android:id="@+id/btn_contact_pick"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="pick contact"/>
-
-    <Button
-        android:id="@+id/btn_lifecycle_test_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="lifecycle test 1"/>
-
-    <Button
-        android:id="@+id/btn_constraint_test_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ConstraintLayout test 1"/>
-
-    <Button
-        android:id="@+id/btn_mvp_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="mvp test"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
