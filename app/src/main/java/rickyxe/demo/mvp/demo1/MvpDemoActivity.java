@@ -1,4 +1,4 @@
-package rickyxe.demo.mvp;
+package rickyxe.demo.mvp.demo1;
 
 import android.os.Bundle;
 import android.view.View;
@@ -37,5 +37,11 @@ public class MvpDemoActivity extends AppCompatActivity implements MvpContract.Vi
     @Override
     public void showData(String data) {
         result.setText(data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter = null;
     }
 }

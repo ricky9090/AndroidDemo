@@ -1,4 +1,4 @@
-package rickyxe.demo.mvp;
+package rickyxe.demo.mvp.demo1;
 
 import rickyxe.demo.mvp.base.BaseLifecyclePresenterImpl;
 
@@ -8,7 +8,7 @@ public interface MvpContract {
         void showData(String data);
     }
 
-    public abstract class Presenter extends BaseLifecyclePresenterImpl {
+    abstract class Presenter extends BaseLifecyclePresenterImpl {
         abstract void loadData();
     }
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="rickyxe.demo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +24,8 @@
         <activity android:name="rickyxe.demo.contactpick.ContactPickActivity" />
         <activity android:name=".lifecycledemo.LifecycleDemoActivity" />
         <activity android:name=".constraintdemo.ConstraintDemoActivity"/>
-        <activity android:name=".mvp.MvpDemoActivity"/>
+        <activity android:name=".mvp.demo1.MvpDemoActivity"/>
+        <activity android:name=".mvp.demo2.MvpDemoActivity2"/>
 
         <service android:name="rickyxe.demo.bgwork.BackgroundService" />
         <service android:name="rickyxe.demo.bgwork2.BackgroundService2" />
