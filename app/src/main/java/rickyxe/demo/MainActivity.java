@@ -13,6 +13,7 @@ import rickyxe.demo.constraintdemo.ConstraintDemoActivity;
 import rickyxe.demo.contactpick.ContactPickActivity;
 import rickyxe.demo.dialogexample.DialogTestActivity;
 import rickyxe.demo.lifecycledemo.LifecycleDemoActivity;
+import rickyxe.demo.mvp.MvpDemoActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button constraintTestBtn = findViewById(R.id.btn_constraint_test_1);
         constraintTestBtn.setOnClickListener(this);
+
+        Button mvpTestBtn = findViewById(R.id.btn_mvp_test);
+        mvpTestBtn.setOnClickListener(this);
     }
 
     @Override
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_constraint_test_1:
                 jumpToActivity(ConstraintDemoActivity.class);
+                break;
+            case R.id.btn_mvp_test:
+                jumpToActivity(MvpDemoActivity.class);
                 break;
             default:
                 break;

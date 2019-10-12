@@ -47,4 +47,10 @@
         android:layout_height="wrap_content"
         android:text="ConstraintLayout test 1"/>
 
+    <Button
+        android:id="@+id/btn_mvp_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="mvp test"/>
+
 </LinearLayout>
