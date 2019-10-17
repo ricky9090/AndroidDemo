@@ -23,6 +23,7 @@ import rickyxe.demo.dialogexample.DialogTestActivity;
 import rickyxe.demo.lifecycledemo.LifecycleDemoActivity;
 import rickyxe.demo.mvp.demo1.MvpDemoActivity;
 import rickyxe.demo.mvp.demo2.MvpDemoActivity2;
+import rickyxe.demo.recyclerdemo.RecyclerDemoActivity;
 
 public class PageListAdapter extends RecyclerView.Adapter<PageListAdapter.PageItemHolder> {
 
@@ -96,5 +97,6 @@ public class PageListAdapter extends RecyclerView.Adapter<PageListAdapter.PageIt
         pageList.add(new DemoPage("ConstraintLayout", "使用ConstraintLayout布局", ConstraintDemoActivity.class));
         pageList.add(new DemoPage("MVP", "MVP模式结合Lifecycle组件", MvpDemoActivity.class));
         pageList.add(new DemoPage("MVP 2", "MVP+OKHttp+Retrofit", MvpDemoActivity2.class));
+        pageList.add(new DemoPage("RecyclerView", "RecyclerView嵌套测试", RecyclerDemoActivity.class));
     }
 }
