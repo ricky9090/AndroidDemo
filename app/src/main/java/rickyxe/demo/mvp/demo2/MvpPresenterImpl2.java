@@ -17,10 +17,16 @@ public class MvpPresenterImpl2 extends MvpContract2.Presenter {
     private MvpContract2.View mView;
     private Handler mHandler;
 
+    private static boolean leakMemoryTest = false;
+    private int waitTime = 3000;
+
     public MvpPresenterImpl2(Context mContext, MvpContract2.View mView) {
         this.mContext = mContext;
         this.mView = mView;
         mHandler = new Handler(Looper.getMainLooper());
+        if (leakMemoryTest) {
+            waitTime = 30000;
+        }
     }
 
     @Override
@@ -31,9 +37,11 @@ public class MvpPresenterImpl2 extends MvpContract2.Presenter {
     @Override
     public void onDestroy() {
         Log.d("MVP-Test", "presenter onDestroy");
-        mContext = null;
-        mView = null;
-        mHandler.removeCallbacksAndMessages(null);
+        if (!leakMemoryTest) {
+            mContext = null;
+            mView = null;
+            mHandler.removeCallbacksAndMessages(null);
+        }
     }
 
     @Override
@@ -52,6 +60,9 @@ public class MvpPresenterImpl2 extends MvpContract2.Presenter {
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                if (leakMemoryTest) {
+                                    Context badContext = mContext;
+                                }
                                 Log.d("MVP-Test","post runnable running");
                                 if (mView != null && result != null) {
                                     Log.d("MVP-Test","showData");
@@ -60,7 +71,7 @@ public class MvpPresenterImpl2 extends MvpContract2.Presenter {
                                     Log.d("MVP-Test","view or result is null, cancel print result");
                                 }
                             }
-                        }, 3000);
+                        }, waitTime);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
