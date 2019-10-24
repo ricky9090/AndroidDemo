@@ -17,7 +17,7 @@ public class MvpPresenterImpl2 extends MvpContract2.Presenter {
     private MvpContract2.View mView;
     private Handler mHandler;
 
-    private static boolean leakMemoryTest = false;
+    private static boolean leakMemoryTest = false;  // 为true时跳过onDestory中的处理，延长postDelay时间，让LeakCanary检测出内存泄漏
     private int waitTime = 3000;
 
     public MvpPresenterImpl2(Context mContext, MvpContract2.View mView) {
@@ -76,7 +76,6 @@ public class MvpPresenterImpl2 extends MvpContract2.Presenter {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         }).start();
     }
