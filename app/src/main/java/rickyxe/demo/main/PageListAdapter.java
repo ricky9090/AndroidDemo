@@ -60,9 +60,14 @@ public class PageListAdapter extends RecyclerView.Adapter<PageListAdapter.PageIt
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(mContext, item.pageClazz);
-                mContext.startActivity(intent);
+                if (item.pageClazz != null) {
+                    Intent intent = new Intent();
+                    intent.setClass(mContext, item.pageClazz);
+                    mContext.startActivity(intent);
+                } else {
+                    item.openPage(mContext);
+                }
+
             }
         });
     }
@@ -98,5 +103,7 @@ public class PageListAdapter extends RecyclerView.Adapter<PageListAdapter.PageIt
         pageList.add(new DemoPage("MVP", "MVP模式结合Lifecycle组件", MvpDemoActivity.class));
         pageList.add(new DemoPage("MVP 2", "MVP+OKHttp+Retrofit", MvpDemoActivity2.class));
         pageList.add(new DemoPage("RecyclerView", "RecyclerView嵌套测试", RecyclerDemoActivity.class));
+        pageList.add(new FlutterDemoPage("Flutter页面", "Flutter Module中的测试页面"));
+
     }
 }
