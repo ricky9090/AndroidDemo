@@ -20,6 +20,8 @@ import rickyxe.demo.common.DemoPage;
 import rickyxe.demo.constraintdemo.ConstraintDemoActivity;
 import rickyxe.demo.contactpick.ContactPickActivity;
 import rickyxe.demo.dialogexample.DialogTestActivity;
+import rickyxe.demo.flutterdemo.FlutterDemoPage;
+import rickyxe.demo.flutterdemo.FlutterSecondPage;
 import rickyxe.demo.lifecycledemo.LifecycleDemoActivity;
 import rickyxe.demo.mvp.demo1.MvpDemoActivity;
 import rickyxe.demo.mvp.demo2.MvpDemoActivity2;
@@ -104,6 +106,7 @@ public class PageListAdapter extends RecyclerView.Adapter<PageListAdapter.PageIt
         pageList.add(new DemoPage("MVP 2", "MVP+OKHttp+Retrofit", MvpDemoActivity2.class));
         pageList.add(new DemoPage("RecyclerView", "RecyclerView嵌套测试", RecyclerDemoActivity.class));
         pageList.add(new FlutterDemoPage("Flutter页面", "Flutter Module中的测试页面"));
+        pageList.add(new FlutterSecondPage("Flutter页面 2", "Flutter Module第二个页面"));
 
     }
 }

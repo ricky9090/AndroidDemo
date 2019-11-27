@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_page/second.dart';
 
 void main() => runApp(MyApp());
+
+void secondMain() => runApp(SecondApp());
+
+class Routes {
+  static const String firstPage = '/';
+  static const String secondPage = 'second';
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -19,7 +27,12 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        Routes.firstPage: (BuildContext context) =>
+            MyHomePage(title: 'Flutter Demo Home Page'),
+        Routes.secondPage: (BuildContext context) =>
+            SecondPage(title: "SecondPage Demo By Route"),
+      },
     );
   }
 }
@@ -97,6 +110,10 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
+            FlatButton(
+              child: Text('go second page'),
+              onPressed: goSecond,
+            )
           ],
         ),
       ),
@@ -106,5 +123,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void goSecond() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => SecondPage(title: "Second Page By Button")));
   }
 }

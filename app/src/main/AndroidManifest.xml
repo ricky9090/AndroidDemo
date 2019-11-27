@@ -43,6 +43,16 @@
                 />-->
         </activity>
 
+        <activity
+            android:name=".flutterdemo.FlutterActivityTwo"
+            android:theme="@style/AppTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true" >
+
+        </activity>
+
         <service android:name="rickyxe.demo.bgwork.BackgroundService" />
         <service android:name="rickyxe.demo.bgwork2.BackgroundService2" />
 
