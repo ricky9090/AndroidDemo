@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_page/second.dart';
+import 'package:flutter_page/thrid.dart';
 
-void main() => runApp(MyApp());
+Future<Null> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(new MyApp());
+}
 
 void secondMain() => runApp(SecondApp());
 
@@ -27,6 +31,7 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
+      // ref https://nicksnettravels.builttoroam.com/flutter-navigation/
       routes: {
         Routes.firstPage: (BuildContext context) =>
             MyHomePage(title: 'Flutter Demo Home Page'),
@@ -110,9 +115,13 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
-            FlatButton(
+            RaisedButton(
               child: Text('go second page'),
               onPressed: goSecond,
+            ),
+            RaisedButton(
+              child: Text('go thrid page'),
+              onPressed: goThrid,
             )
           ],
         ),
@@ -127,6 +136,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void goSecond() {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => SecondPage(title: "Second Page By Button")));
+        builder: (BuildContext context) =>
+            SecondPage(title: "Second Page By Button")));
+  }
+
+  void goThrid() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => ThridPage(title: "Thrid page")));
   }
 }
