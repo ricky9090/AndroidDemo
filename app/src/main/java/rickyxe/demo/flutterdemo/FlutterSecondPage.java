@@ -19,8 +19,8 @@ public class FlutterSecondPage extends DemoPage {
         Intent defaultFlutter =
                 (new Intent(context, FlutterActivityTwo.class))
                         .putExtra("cached_engine_id", MyApplication.FLUTTER_ENGINE_ID_TWO)
-                        .putExtra("destroy_engine_with_activity", false)
-                        .putExtra("background_mode", FlutterActivity.BackgroundMode.opaque.name());
+                        .putExtra("destroy_engine_with_activity", false);
+                        //.putExtra("background_mode", FlutterActivity.BackgroundMode.opaque.name());  // error >= flutter 1.12
         context.startActivity(defaultFlutter);
     }
 }
