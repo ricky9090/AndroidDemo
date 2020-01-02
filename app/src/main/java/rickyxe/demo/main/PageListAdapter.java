@@ -26,6 +26,7 @@ import rickyxe.demo.lifecycledemo.LifecycleDemoActivity;
 import rickyxe.demo.mvp.demo1.MvpDemoActivity;
 import rickyxe.demo.mvp.demo2.MvpDemoActivity2;
 import rickyxe.demo.recyclerdemo.RecyclerDemoActivity;
+import rickyxe.demo.reduxdemo.ReduxDemoActivity;
 
 public class PageListAdapter extends RecyclerView.Adapter<PageListAdapter.PageItemHolder> {
 
@@ -105,6 +106,7 @@ public class PageListAdapter extends RecyclerView.Adapter<PageListAdapter.PageIt
         pageList.add(new DemoPage("MVP", "MVP模式结合Lifecycle组件", MvpDemoActivity.class));
         pageList.add(new DemoPage("MVP 2", "MVP+OKHttp+Retrofit", MvpDemoActivity2.class));
         pageList.add(new DemoPage("RecyclerView", "RecyclerView嵌套测试", RecyclerDemoActivity.class));
+        pageList.add(new DemoPage("Redux", "模拟Redux状态管理", ReduxDemoActivity.class));
         pageList.add(new FlutterDemoPage("Flutter页面", "Flutter Module中的测试页面"));
         pageList.add(new FlutterSecondPage("Flutter页面 2", "Flutter Module第二个页面"));
 

@@ -28,6 +28,7 @@
         <activity android:name=".mvp.demo1.MvpDemoActivity"/>
         <activity android:name=".mvp.demo2.MvpDemoActivity2"/>
         <activity android:name=".recyclerdemo.RecyclerDemoActivity"/>
+        <activity android:name=".reduxdemo.ReduxDemoActivity" />
 
         <activity
             android:name="io.flutter.embedding.android.FlutterActivity"
