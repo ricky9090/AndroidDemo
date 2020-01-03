@@ -14,8 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import rickyxe.demo.R;
-import rickyxe.demo.reduxdemo.action.ChangeTime;
-import rickyxe.demo.reduxdemo.action.ChangeType;
+import rickyxe.demo.reduxdemo.base.Action;
 import rickyxe.demo.reduxdemo.base.ActivityWithStore;
 import rickyxe.demo.reduxdemo.base.Store;
 import rickyxe.demo.reduxdemo.middleware.AnotherLogger;
@@ -114,13 +113,13 @@ public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implement
                         ExampleState currentState = getStore().getCurrentState();
                         switch (which) {
                             case 0:
-                                getStore().dispatch(new ChangeTime(2017));
+                                getStore().dispatch(Action.create(ExampleAction.CHANGE_TIME, 2017));
                                 break;
                             case 1:
-                                getStore().dispatch(new ChangeTime(2018));
+                                getStore().dispatch(Action.create(ExampleAction.CHANGE_TIME, 2018));
                                 break;
                             case 2:
-                                getStore().dispatch(new ChangeTime(2019));
+                                getStore().dispatch(Action.create(ExampleAction.CHANGE_TIME, 2019));
                                 break;
                         }
                     }
@@ -136,10 +135,10 @@ public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implement
                         ExampleState currentState = getStore().getCurrentState();
                         switch (which) {
                             case 0:
-                                getStore().dispatch(new ChangeType("Android"));
+                                getStore().dispatch(Action.create(ExampleAction.CHANGE_TYPE, "Android"));
                                 break;
                             case 1:
-                                getStore().dispatch(new ChangeType("iOS"));
+                                getStore().dispatch(Action.create(ExampleAction.CHANGE_TYPE, "iOS"));
                                 break;
                         }
                     }
