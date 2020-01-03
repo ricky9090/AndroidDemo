@@ -18,6 +18,8 @@ import rickyxe.demo.reduxdemo.action.ChangeTime;
 import rickyxe.demo.reduxdemo.action.ChangeType;
 import rickyxe.demo.reduxdemo.base.ActivityWithStore;
 import rickyxe.demo.reduxdemo.base.Store;
+import rickyxe.demo.reduxdemo.middleware.AnotherLogger;
+import rickyxe.demo.reduxdemo.middleware.Logger;
 
 public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implements Store.StateListener<ExampleState> {
 
@@ -38,22 +40,22 @@ public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implement
 
         initViews();
 
-        if (getStore() != null) {
-            Store<ExampleState> store = getStore();
-            yearText.setText(store.getCurrentState().year + "年");
-            typeText.setText(store.getCurrentState().type + " 类型");
+        Store<ExampleState> store = getStore();
+        yearText.setText(store.getCurrentState().year + "年");
+        typeText.setText(store.getCurrentState().type + " 类型");
 
-            headerText.setText(store.getCurrentState().toString());
-        }
+        headerText.setText(store.getCurrentState().toString());
+
 
         getStore().attachListener(this);
     }
 
+    @NonNull
     @Override
     protected Store<ExampleState> createStore() {
         ExampleState initState = new ExampleState(2017, "Android");
         ExampleReducer reducer = new ExampleReducer();
-        return new Store<>(initState, reducer);
+        return new Store<>(initState, reducer, new Logger(), new AnotherLogger());
     }
 
     @Override

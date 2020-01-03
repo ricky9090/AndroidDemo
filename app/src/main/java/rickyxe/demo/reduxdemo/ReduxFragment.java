@@ -12,14 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import rickyxe.demo.R;
-import rickyxe.demo.reduxdemo.base.ActivityWithStore;
 import rickyxe.demo.reduxdemo.base.Store;
 
 public class ReduxFragment extends Fragment implements Store.StateListener<ExampleState> {
 
     private static final String LOG_TAG = "ReduxFragment";
 
-    private Store store;
+    private Store<ExampleState> store;
     private String name;
 
     private TextView titleText;
@@ -40,12 +39,9 @@ public class ReduxFragment extends Fragment implements Store.StateListener<Examp
             name = getArguments().getString("name");
         }
 
-        if (getActivity() instanceof ActivityWithStore) {
-            Store _store = ((ActivityWithStore) getActivity()).getStore();
-            if (_store.getCurrentState() instanceof ExampleState) {
-                store = _store;
-                store.attachListener(this);
-            }
+        if (getActivity() instanceof ReduxDemoActivity) {
+            this.store = ((ReduxDemoActivity) getActivity()).getStore();
+            this.store.attachListener(this);
         }
     }
 

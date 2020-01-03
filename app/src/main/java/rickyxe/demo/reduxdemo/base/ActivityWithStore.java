@@ -2,6 +2,7 @@ package rickyxe.demo.reduxdemo.base;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,9 +25,14 @@ public abstract class ActivityWithStore<T> extends AppCompatActivity {
         }
     }
 
+    @NonNull
     protected abstract Store<T> createStore();
 
+    @NonNull
     public Store<T> getStore() {
+        if (store == null) {
+            store = createStore();
+        }
         return store;
     }
 }

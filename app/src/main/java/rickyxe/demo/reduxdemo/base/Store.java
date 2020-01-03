@@ -1,18 +1,38 @@
 package rickyxe.demo.reduxdemo.base;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Store<STATE> {
+public final class Store<STATE> {
 
     private STATE currentState;
     private Reducer<STATE> reducer;
 
-    List<StateListener<STATE>> listenerList = new ArrayList<>();
+    private Middleware<STATE> middleware;
 
-    public Store(STATE currentState, Reducer<STATE> reducer) {
-        this.currentState = currentState;
+    private final List<StateListener<STATE>> listenerList = new ArrayList<>();
+
+    public Store(@NonNull STATE initialState, Reducer<STATE> reducer) {
+        this.currentState = initialState;
         this.reducer = reducer;
+    }
+
+    public Store(@NonNull STATE initialState, Reducer<STATE> reducer, Middleware<STATE> ... middlewares) {
+        this(initialState, reducer);
+
+        if (middlewares != null && middlewares.length > 0) {
+            this.middleware = middlewares[0];
+            Middleware<STATE> last = null;
+            for (int i = 0; i < middlewares.length; i++) {
+                Middleware<STATE> m = middlewares[i];
+                if (last != null) {
+                    last.next = m;
+                }
+                last = m;
+            }
+        }
     }
 
     public STATE getCurrentState() {
@@ -20,12 +40,17 @@ public class Store<STATE> {
     }
 
     public void dispatch(Action action) {
-        this.currentState = applyReducer(this.currentState, action);
+        if (middleware != null) {
+            this.currentState = middleware.dispatch(this.currentState, action, reducer);
+        } else {
+            this.currentState = applyReducer(this.currentState, action);
+        }
+
         notifyListeners(this.currentState);
     }
 
-    private STATE applyReducer(STATE old, Action action) {
-        return reducer.reduce(old, action);
+    private STATE applyReducer(STATE currentState, Action action) {
+        return reducer.reduce(currentState, action);
     }
 
     private void notifyListeners(STATE updatedState) {
