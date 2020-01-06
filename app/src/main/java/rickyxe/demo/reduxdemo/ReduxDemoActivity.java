@@ -19,6 +19,8 @@ import rickyxe.demo.reduxdemo.base.ActivityWithStore;
 import rickyxe.demo.reduxdemo.base.Store;
 import rickyxe.demo.reduxdemo.middleware.AnotherLogger;
 import rickyxe.demo.reduxdemo.middleware.Logger;
+import rickyxe.demo.reduxdemo.reducer.ChangeTimeReducer;
+import rickyxe.demo.reduxdemo.reducer.ChangeTypeReducer;
 
 public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implements Store.StateListener<ExampleState> {
 
@@ -45,16 +47,19 @@ public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implement
 
         headerText.setText(store.getCurrentState().toString());
 
-
         getStore().attachListener(this);
     }
 
     @NonNull
     @Override
-    protected Store<ExampleState> createStore() {
+    public Store<ExampleState> createStore() {
         ExampleState initState = new ExampleState(2017, "Android");
-        ExampleReducer reducer = new ExampleReducer();
-        return new Store<>(initState, reducer, new Logger(), new AnotherLogger());
+        ChangeTimeReducer timeReducer = new ChangeTimeReducer();
+        ChangeTypeReducer typeReducer = new ChangeTypeReducer();
+        Store<ExampleState> store = new Store<>(initState, new Logger(), new AnotherLogger());
+        store.addReducer(timeReducer);
+        store.addReducer(typeReducer);
+        return store;
     }
 
     @Override
@@ -110,7 +115,6 @@ public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implement
                 .setItems(yearArray, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ExampleState currentState = getStore().getCurrentState();
                         switch (which) {
                             case 0:
                                 getStore().dispatch(Action.create(ExampleAction.CHANGE_TIME, 2017));
@@ -132,7 +136,6 @@ public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implement
                 .setItems(typeArray, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ExampleState currentState = getStore().getCurrentState();
                         switch (which) {
                             case 0:
                                 getStore().dispatch(Action.create(ExampleAction.CHANGE_TYPE, "Android"));

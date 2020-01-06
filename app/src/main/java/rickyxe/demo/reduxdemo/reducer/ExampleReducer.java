@@ -1,7 +1,8 @@
-package rickyxe.demo.reduxdemo;
+package rickyxe.demo.reduxdemo.reducer;
 
 import android.util.Log;
 
+import rickyxe.demo.reduxdemo.ExampleState;
 import rickyxe.demo.reduxdemo.base.Action;
 import rickyxe.demo.reduxdemo.base.Reducer;
 

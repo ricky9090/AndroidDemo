@@ -8,19 +8,18 @@ import java.util.List;
 public final class Store<STATE> {
 
     private STATE currentState;
-    private Reducer<STATE> reducer;
 
     private Middleware<STATE> middleware;
 
+    private final List<Reducer<STATE>> reducerList = new ArrayList<>();
     private final List<StateListener<STATE>> listenerList = new ArrayList<>();
 
-    public Store(@NonNull STATE initialState, Reducer<STATE> reducer) {
+    public Store(@NonNull STATE initialState) {
         this.currentState = initialState;
-        this.reducer = reducer;
     }
 
-    public Store(@NonNull STATE initialState, Reducer<STATE> reducer, Middleware<STATE> ... middlewares) {
-        this(initialState, reducer);
+    public Store(@NonNull STATE initialState, Middleware<STATE> ... middlewares) {
+        this(initialState);
 
         if (middlewares != null && middlewares.length > 0) {
             this.middleware = middlewares[0];
@@ -35,22 +34,38 @@ public final class Store<STATE> {
         }
     }
 
+    public void addReducer(Reducer<STATE> reducer) {
+        if (reducerList.contains(reducer)) {
+            return;
+        }
+
+        reducerList.add(reducer);
+    }
+
     public STATE getCurrentState() {
         return currentState;
     }
 
     public void dispatch(Action action) {
         if (middleware != null) {
-            this.currentState = middleware.dispatch(this.currentState, action, reducer);
+            this.currentState = middleware.dispatch(this.currentState, action, reducerList);
         } else {
-            this.currentState = applyReducer(this.currentState, action);
+            this.currentState = applyReducer(this.currentState, action, reducerList);
         }
 
         notifyListeners(this.currentState);
     }
 
-    private STATE applyReducer(STATE currentState, Action action) {
-        return reducer.reduce(currentState, action);
+    static <T> T applyReducer(T currentState, Action action, List<Reducer<T>> reducerList) {
+        T result = currentState;
+        for (Reducer<T> reducer: reducerList) {
+            T reduceState = reducer.reduce(currentState, action);
+            if (reduceState != null && !reduceState.equals(currentState)) {
+                result = reduceState;
+            }
+        }
+
+        return result;
     }
 
     private void notifyListeners(STATE updatedState) {
@@ -77,6 +92,7 @@ public final class Store<STATE> {
     }
 
     public void onDestroy() {
+        reducerList.clear();
         listenerList.clear();
     }
 

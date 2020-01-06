@@ -1,12 +1,13 @@
 package rickyxe.demo.reduxdemo.base;
 
 import android.os.Bundle;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public abstract class ActivityWithStore<T> extends AppCompatActivity {
+public abstract class ActivityWithStore<T> extends AppCompatActivity implements ActivityWithStoreContract<T> {
 
     private Store<T> store = null;
 
@@ -20,19 +21,28 @@ public abstract class ActivityWithStore<T> extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (store != null) {
-            store.onDestroy();
-        }
+        destroyStore();
     }
 
     @NonNull
-    protected abstract Store<T> createStore();
+    @Override
+    public abstract Store<T> createStore();
 
     @NonNull
     public Store<T> getStore() {
+        if (Thread.currentThread() != Looper.getMainLooper().getThread()) {
+            throw new RuntimeException("getStore not called on Main Thread");
+        }
         if (store == null) {
             store = createStore();
         }
         return store;
+    }
+
+    @Override
+    public void destroyStore() {
+        if (store != null) {
+            store.onDestroy();
+        }
     }
 }
