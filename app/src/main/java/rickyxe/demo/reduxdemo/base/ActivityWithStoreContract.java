@@ -5,10 +5,10 @@ import androidx.annotation.NonNull;
 public interface ActivityWithStoreContract<T> {
 
     @NonNull
-    Store<T> createStore();
+    Storeable<T> createStore();
 
     void destroyStore();
 
     @NonNull
-    Store<T> getStore();
+    Storeable<T> getStore();
 }

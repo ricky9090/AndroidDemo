@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Store<STATE> {
+public final class Store<STATE> implements Storeable<STATE> {
 
     private STATE currentState;
 
@@ -34,6 +34,7 @@ public final class Store<STATE> {
         }
     }
 
+    @Override
     public void addReducer(Reducer<STATE> reducer) {
         if (reducerList.contains(reducer)) {
             return;
@@ -42,10 +43,12 @@ public final class Store<STATE> {
         reducerList.add(reducer);
     }
 
+    @Override
     public STATE getCurrentState() {
         return currentState;
     }
 
+    @Override
     public void dispatch(Action action) {
         if (middleware != null) {
             this.currentState = middleware.dispatch(this.currentState, action, reducerList);
@@ -74,6 +77,7 @@ public final class Store<STATE> {
         }
     }
 
+    @Override
     public void attachListener(StateListener<STATE> listener) {
         if (listenerList.contains(listener)) {
             return;
@@ -82,6 +86,7 @@ public final class Store<STATE> {
         listenerList.add(listener);
     }
 
+    @Override
     public void detachListener(StateListener<STATE> listener) {
         if (listenerList.contains(listener)) {
             int index = listenerList.indexOf(listener);
@@ -91,12 +96,9 @@ public final class Store<STATE> {
         }
     }
 
+    @Override
     public void onDestroy() {
         reducerList.clear();
         listenerList.clear();
-    }
-
-    public interface StateListener<T> {
-        void onUpdateState(T state);
     }
 }

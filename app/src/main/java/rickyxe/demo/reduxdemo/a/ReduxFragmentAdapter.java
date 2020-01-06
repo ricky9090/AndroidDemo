@@ -1,4 +1,4 @@
-package rickyxe.demo.reduxdemo;
+package rickyxe.demo.reduxdemo.a;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,6 +22,4 @@ public class ReduxFragmentAdapter extends FragmentStateAdapter {
     public int getItemCount() {
         return 3;
     }
-
-
 }

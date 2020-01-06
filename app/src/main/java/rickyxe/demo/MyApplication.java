@@ -7,11 +7,14 @@ import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.FlutterEngineCache;
 import io.flutter.embedding.engine.dart.DartExecutor;
 import io.flutter.view.FlutterMain;
+import rickyxe.demo.reduxdemo.base.StoreManager;
 
 public class MyApplication extends FlutterApplication {
 
     public static final String FLUTTER_ENGINE_ID = "demo_flutter_engine";
     public static final String FLUTTER_ENGINE_ID_TWO = "demo_flutter_engine_two";
+
+    private StoreManager storeManager;
 
     @Override
     public void onCreate() {
@@ -21,6 +24,8 @@ public class MyApplication extends FlutterApplication {
         // 不调用此函数，new FlutterEngine 会抛异常
         FlutterMain.ensureInitializationComplete(this, null);
         warmFlutter(this);
+
+        storeManager = new StoreManager();
     }
 
     /**
@@ -46,5 +51,9 @@ public class MyApplication extends FlutterApplication {
         FlutterEngineCache
                 .getInstance()
                 .put(FLUTTER_ENGINE_ID_TWO, secondPage);
+    }
+
+    public StoreManager getStoreManager() {
+        return storeManager;
     }
 }

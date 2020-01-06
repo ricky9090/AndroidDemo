@@ -1,4 +1,4 @@
-package rickyxe.demo.reduxdemo;
+package rickyxe.demo.reduxdemo.a;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,13 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import rickyxe.demo.R;
-import rickyxe.demo.reduxdemo.base.Store;
+import rickyxe.demo.reduxdemo.ExampleState;
+import rickyxe.demo.reduxdemo.base.Storeable;
 
-public class ReduxFragment extends Fragment implements Store.StateListener<ExampleState> {
+public class ReduxFragment extends Fragment implements Storeable.StateListener<ExampleState> {
 
     private static final String LOG_TAG = "ReduxFragment";
 
-    private Store<ExampleState> store;
+    private Storeable<ExampleState> store;
     private String name;
 
     private TextView titleText;

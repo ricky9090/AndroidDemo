@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class ActivityWithStore<T> extends AppCompatActivity implements ActivityWithStoreContract<T> {
 
-    private Store<T> store = null;
+    private Storeable<T> store = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,10 +26,10 @@ public abstract class ActivityWithStore<T> extends AppCompatActivity implements 
 
     @NonNull
     @Override
-    public abstract Store<T> createStore();
+    public abstract Storeable<T> createStore();
 
     @NonNull
-    public Store<T> getStore() {
+    public Storeable<T> getStore() {
         if (Thread.currentThread() != Looper.getMainLooper().getThread()) {
             throw new RuntimeException("getStore not called on Main Thread");
         }
