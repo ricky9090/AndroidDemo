@@ -20,6 +20,7 @@ import rickyxe.demo.reduxdemo.ExampleAction;
 import rickyxe.demo.reduxdemo.ExampleState;
 import rickyxe.demo.reduxdemo.base.Action;
 import rickyxe.demo.reduxdemo.base.ActivityWithStoreContract;
+import rickyxe.demo.reduxdemo.base.StateChangeListener;
 import rickyxe.demo.reduxdemo.base.Store;
 import rickyxe.demo.reduxdemo.base.Storeable;
 import rickyxe.demo.reduxdemo.middleware.AnotherLogger;
@@ -28,7 +29,7 @@ import rickyxe.demo.reduxdemo.reducer.ChangeTimeReducer;
 import rickyxe.demo.reduxdemo.reducer.ChangeTypeReducer;
 
 public class ReduxDemoTwoActivity extends AppCompatActivity implements
-        Storeable.StateListener<ExampleState>,
+        StateChangeListener<ExampleState>,
         ActivityWithStoreContract<ExampleState> {
 
     public static final String STORE_ID = "Store_ReduxDemoTwoActivity";
@@ -49,18 +50,20 @@ public class ReduxDemoTwoActivity extends AppCompatActivity implements
 
         setContentView(R.layout.activity_redux_demo);
 
-        //createStore();
-        getStore().attachListener(this);
+        createStore();
+        getStore().addListener(this);
         initViews();
+
+        // display init state
         yearText.setText(getStore().getCurrentState().year + "年");
         typeText.setText(getStore().getCurrentState().type + " 类型");
-
         headerText.setText(getStore().getCurrentState().toString());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        getStore().removeListener(this);
         destroyStore();
     }
 
@@ -110,7 +113,7 @@ public class ReduxDemoTwoActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onUpdateState(ExampleState state) {
+    public void onStateChange(ExampleState state) {
         yearText.setText(state.year + "年");
         typeText.setText(state.type + " 类型");
         headerText.setText(state.toString());

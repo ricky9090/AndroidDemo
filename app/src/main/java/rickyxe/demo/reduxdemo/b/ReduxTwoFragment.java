@@ -14,9 +14,10 @@ import androidx.fragment.app.Fragment;
 import rickyxe.demo.MyApplication;
 import rickyxe.demo.R;
 import rickyxe.demo.reduxdemo.ExampleState;
+import rickyxe.demo.reduxdemo.base.StateChangeListener;
 import rickyxe.demo.reduxdemo.base.Storeable;
 
-public class ReduxTwoFragment extends Fragment implements Storeable.StateListener<ExampleState> {
+public class ReduxTwoFragment extends Fragment implements StateChangeListener<ExampleState> {
 
     private static final String LOG_TAG = "ReduxTwoFragment";
     private String name;
@@ -40,7 +41,7 @@ public class ReduxTwoFragment extends Fragment implements Storeable.StateListene
         }
 
         if (getStore() != null) {
-            getStore().attachListener(this);
+            getStore().addListener(this);
         }
     }
 
@@ -58,7 +59,7 @@ public class ReduxTwoFragment extends Fragment implements Storeable.StateListene
     public void onDestroy() {
         super.onDestroy();
         if (getStore() != null) {
-            getStore().detachListener(this);
+            getStore().removeListener(this);
         }
 
     }
@@ -68,12 +69,12 @@ public class ReduxTwoFragment extends Fragment implements Storeable.StateListene
         super.onResume();
         if (getStore() != null) {
             ExampleState state = getStore().getCurrentState();
-            onUpdateState(state);
+            onStateChange(state);
         }
     }
 
     @Override
-    public void onUpdateState(ExampleState state) {
+    public void onStateChange(ExampleState state) {
         if (!isVisible()) {
             Log.d(LOG_TAG, this.toString() + "  not visible !!! update cancel");
             return;
@@ -90,7 +91,7 @@ public class ReduxTwoFragment extends Fragment implements Storeable.StateListene
             if (getActivity() != null) {
                 MyApplication myApplication = (MyApplication) getActivity().getApplication();
                 return (Storeable<ExampleState>) myApplication.getStoreManager()
-                                .getStoreById(ReduxDemoTwoActivity.STORE_ID);
+                        .getStoreById(ReduxDemoTwoActivity.STORE_ID);
             }
             return null;
         } catch (Exception e) {

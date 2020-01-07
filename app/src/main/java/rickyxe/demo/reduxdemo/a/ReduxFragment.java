@@ -13,9 +13,10 @@ import androidx.fragment.app.Fragment;
 
 import rickyxe.demo.R;
 import rickyxe.demo.reduxdemo.ExampleState;
+import rickyxe.demo.reduxdemo.base.StateChangeListener;
 import rickyxe.demo.reduxdemo.base.Storeable;
 
-public class ReduxFragment extends Fragment implements Storeable.StateListener<ExampleState> {
+public class ReduxFragment extends Fragment implements StateChangeListener<ExampleState> {
 
     private static final String LOG_TAG = "ReduxFragment";
 
@@ -42,7 +43,7 @@ public class ReduxFragment extends Fragment implements Storeable.StateListener<E
 
         if (getActivity() instanceof ReduxDemoActivity) {
             this.store = ((ReduxDemoActivity) getActivity()).getStore();
-            this.store.attachListener(this);
+            this.store.addListener(this);
         }
     }
 
@@ -59,7 +60,7 @@ public class ReduxFragment extends Fragment implements Storeable.StateListener<E
     @Override
     public void onDestroy() {
         super.onDestroy();
-        store.detachListener(this);
+        store.removeListener(this);
         store = null;
     }
 
@@ -68,12 +69,12 @@ public class ReduxFragment extends Fragment implements Storeable.StateListener<E
         super.onResume();
         if (store != null) {
             ExampleState state = (ExampleState) store.getCurrentState();
-            onUpdateState(state);
+            onStateChange(state);
         }
     }
 
     @Override
-    public void onUpdateState(ExampleState state) {
+    public void onStateChange(ExampleState state) {
         if (!isVisible()) {
             Log.d(LOG_TAG, this.toString() + "  not visible !!! update cancel");
             return;

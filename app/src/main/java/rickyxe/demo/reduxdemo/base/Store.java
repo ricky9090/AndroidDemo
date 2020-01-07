@@ -5,20 +5,20 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Store<STATE> implements Storeable<STATE> {
+public final class Store<STATE extends StateObject> implements Storeable<STATE> {
 
     private STATE currentState;
 
     private Middleware<STATE> middleware;
 
     private final List<Reducer<STATE>> reducerList = new ArrayList<>();
-    private final List<StateListener<STATE>> listenerList = new ArrayList<>();
+    private final List<StateChangeListener<STATE>> listenerList = new ArrayList<>();
 
     public Store(@NonNull STATE initialState) {
         this.currentState = initialState;
     }
 
-    public Store(@NonNull STATE initialState, Middleware<STATE> ... middlewares) {
+    public Store(@NonNull STATE initialState, Middleware<STATE>... middlewares) {
         this(initialState);
 
         if (middlewares != null && middlewares.length > 0) {
@@ -44,24 +44,27 @@ public final class Store<STATE> implements Storeable<STATE> {
     }
 
     @Override
+    @SuppressWarnings(value = "unchecked")
     public STATE getCurrentState() {
-        return currentState;
+        return (STATE) currentState.copy(currentState);
     }
 
     @Override
+    @SuppressWarnings(value = "unchecked")
     public void dispatch(Action action) {
+        STATE tmp = (STATE) this.currentState.copy(currentState);
         if (middleware != null) {
-            this.currentState = middleware.dispatch(this.currentState, action, reducerList);
+            this.currentState = middleware.dispatch(tmp, action, reducerList);
         } else {
-            this.currentState = applyReducer(this.currentState, action, reducerList);
+            this.currentState = applyReducer(tmp, action, reducerList);
         }
 
         notifyListeners(this.currentState);
     }
 
-    static <T> T applyReducer(T currentState, Action action, List<Reducer<T>> reducerList) {
+    static <T extends StateObject> T applyReducer(T currentState, Action action, List<Reducer<T>> reducerList) {
         T result = currentState;
-        for (Reducer<T> reducer: reducerList) {
+        for (Reducer<T> reducer : reducerList) {
             T reduceState = reducer.reduce(currentState, action);
             if (reduceState != null && !reduceState.equals(currentState)) {
                 result = reduceState;
@@ -72,13 +75,13 @@ public final class Store<STATE> implements Storeable<STATE> {
     }
 
     private void notifyListeners(STATE updatedState) {
-        for (StateListener<STATE> listener : listenerList) {
-            listener.onUpdateState(updatedState);
+        for (StateChangeListener<STATE> listener : listenerList) {
+            listener.onStateChange(updatedState);
         }
     }
 
     @Override
-    public void attachListener(StateListener<STATE> listener) {
+    public void addListener(StateChangeListener<STATE> listener) {
         if (listenerList.contains(listener)) {
             return;
         }
@@ -87,7 +90,7 @@ public final class Store<STATE> implements Storeable<STATE> {
     }
 
     @Override
-    public void detachListener(StateListener<STATE> listener) {
+    public void removeListener(StateChangeListener<STATE> listener) {
         if (listenerList.contains(listener)) {
             int index = listenerList.indexOf(listener);
             if (index >= 0) {
@@ -98,6 +101,7 @@ public final class Store<STATE> implements Storeable<STATE> {
 
     @Override
     public void onDestroy() {
+        middleware = null;
         reducerList.clear();
         listenerList.clear();
     }

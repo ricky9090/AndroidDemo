@@ -30,8 +30,6 @@ public class Action<D> {
         return "[Action " + type + ":" + data + "]";
     }
 
-
-
     public static <D> Action<D> create(String type, D data) {
         return new Action<>(type, data);
     }

@@ -2,7 +2,9 @@ package rickyxe.demo.reduxdemo;
 
 import androidx.annotation.NonNull;
 
-public class ExampleState {
+import rickyxe.demo.reduxdemo.base.StateObject;
+
+public class ExampleState implements StateObject {
 
     public int year;
     public String type;
@@ -16,5 +18,16 @@ public class ExampleState {
     @Override
     public String toString() {
         return "State: [Year: " + year + ", Type: " + type + "]";
+    }
+
+
+    @Override
+    public StateObject copy(StateObject old) {
+        if (old instanceof ExampleState) {
+            ExampleState oldState = (ExampleState) old;
+            ExampleState state = new ExampleState(oldState.year, oldState.type);
+            return state;
+        }
+        return null;
     }
 }

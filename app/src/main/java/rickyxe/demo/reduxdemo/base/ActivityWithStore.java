@@ -7,7 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public abstract class ActivityWithStore<T> extends AppCompatActivity implements ActivityWithStoreContract<T> {
+public abstract class ActivityWithStore<T extends StateObject>
+        extends AppCompatActivity
+        implements ActivityWithStoreContract<T> {
 
     private Storeable<T> store = null;
 

@@ -2,19 +2,24 @@ package rickyxe.demo.reduxdemo.base;
 
 import java.util.List;
 
-public abstract class Middleware<T> {
+public abstract class Middleware<T extends StateObject> {
 
     protected Middleware<T> next;
 
+    @SuppressWarnings(value = "unchecked")
     protected T dispatch(T currentState, Action action, List<Reducer<T>> reducerList) {
-        beforeReduce(currentState, action);
+        T tmpBefore = (T) currentState.copy(currentState);
+        beforeReduce(tmpBefore, action);
+
         T updatedState;
         if (next == null) {
             updatedState = Store.applyReducer(currentState, action, reducerList);
         } else {
             updatedState = next.dispatch(currentState, action, reducerList);
         }
-        afterReduce(updatedState);
+
+        T tmpAfter = (T) updatedState.copy(updatedState);
+        afterReduce(tmpAfter);
 
         return updatedState;
     }

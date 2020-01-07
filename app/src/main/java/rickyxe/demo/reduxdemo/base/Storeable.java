@@ -1,6 +1,6 @@
 package rickyxe.demo.reduxdemo.base;
 
-public interface Storeable<T> {
+public interface Storeable<T extends StateObject> {
 
     T getCurrentState();
 
@@ -8,13 +8,9 @@ public interface Storeable<T> {
 
     void dispatch(Action action);
 
-    void attachListener(StateListener<T> listener);
+    void addListener(StateChangeListener<T> listener);
 
-    void detachListener(StateListener<T> listener);
+    void removeListener(StateChangeListener<T> listener);
 
     void onDestroy();
-
-    interface StateListener<S> {
-        void onUpdateState(S state);
-    }
 }

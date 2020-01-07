@@ -18,6 +18,7 @@ import rickyxe.demo.reduxdemo.ExampleAction;
 import rickyxe.demo.reduxdemo.ExampleState;
 import rickyxe.demo.reduxdemo.base.Action;
 import rickyxe.demo.reduxdemo.base.ActivityWithStore;
+import rickyxe.demo.reduxdemo.base.StateChangeListener;
 import rickyxe.demo.reduxdemo.base.Store;
 import rickyxe.demo.reduxdemo.base.Storeable;
 import rickyxe.demo.reduxdemo.middleware.AnotherLogger;
@@ -25,7 +26,7 @@ import rickyxe.demo.reduxdemo.middleware.Logger;
 import rickyxe.demo.reduxdemo.reducer.ChangeTimeReducer;
 import rickyxe.demo.reduxdemo.reducer.ChangeTypeReducer;
 
-public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implements Storeable.StateListener<ExampleState> {
+public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implements StateChangeListener<ExampleState> {
 
     String[] yearArray = {"2017", "2018", "2019"};
     String[] typeArray = {"Android", "iOS"};
@@ -50,7 +51,7 @@ public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implement
 
         headerText.setText(store.getCurrentState().toString());
 
-        getStore().attachListener(this);
+        getStore().addListener(this);
     }
 
     @NonNull
@@ -68,12 +69,12 @@ public class ReduxDemoActivity extends ActivityWithStore<ExampleState> implement
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        getStore().detachListener(this);
+        getStore().removeListener(this);
         getStore().onDestroy();
     }
 
     @Override
-    public void onUpdateState(ExampleState state) {
+    public void onStateChange(ExampleState state) {
         yearText.setText(state.year + "年");
         typeText.setText(state.type + " 类型");
         headerText.setText(state.toString());
