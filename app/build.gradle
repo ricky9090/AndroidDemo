@@ -54,5 +54,4 @@ dependencies {
     //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
 
     implementation project(':easynetwork')
-    implementation project(':flutter')
 }

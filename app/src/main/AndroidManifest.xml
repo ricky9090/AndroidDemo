@@ -31,30 +31,6 @@
         <activity android:name=".reduxdemo.a.ReduxDemoActivity" />
         <activity android:name=".reduxdemo.b.ReduxDemoTwoActivity" />
 
-        <activity
-            android:name="io.flutter.embedding.android.FlutterActivity"
-            android:theme="@style/AppTheme"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
-            android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true" >
-
-            <!--<meta-data
-                android:name="io.flutter.Entrypoint"
-                android:value="myMainDartMethod"
-                />-->
-        </activity>
-
-        <activity
-            android:name=".flutterdemo.FlutterActivityTwo"
-            android:theme="@style/AppTheme"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
-            android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true" >
-
-        </activity>
-
         <service android:name="rickyxe.demo.bgwork.BackgroundService" />
         <service android:name="rickyxe.demo.bgwork2.BackgroundService2" />
 

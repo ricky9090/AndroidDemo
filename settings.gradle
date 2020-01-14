@@ -1,8 +1,2 @@
 include ':app', ':easynetwork'
-setBinding(new Binding([gradle: this]))                                 // new
-evaluate(new File(                                                      // new
-        settingsDir.parentFile,                                               // new
-        'AndroidDemo/flutter_page/.android/include_flutter.groovy'                          // new
-))
 
-include ':flutter_page'
